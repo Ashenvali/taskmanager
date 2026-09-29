@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>StudyTrack - Student Task Manager</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar">
+
+        <h2>📚 StudyTrack</h2>
+
+        <p>Student Task Manager</p>
+
+
+        <nav>
+
+            <button
+                class="nav-button active"
+                onclick="showPage('dashboard', this)">
+                🏠 Dashboard
+            </button>
+
+
+            <button
+                class="nav-button"
+                onclick="showPage('tasks', this)">
+                📋 My Tasks
+            </button>
+
+
+            <button
+                class="nav-button"
+                onclick="showPage('calendar', this)">
+                📅 Calendar
+            </button>
+
+
+            <button
+                class="nav-button"
+                onclick="showPage('statistics', this)">
+                📊 Statistics
+            </button>
+
+
+            <button
+                class="nav-button"
+                onclick="showPage('settings', this)">
+                ⚙️ Settings
+            </button>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="main">
+
+
+        <!-- =========================
+             DASHBOARD
+        ========================== -->
+
+        <section
+            id="dashboard"
+            class="page active-page">
+
+            <header>
+
+                <p>Welcome Back,</p>
+
+                <h1>
+                    Shaik Ashenvali 👋
+                </h1>
+
+                <span>
+                    Organize your tasks and achieve your goals.
+                </span>
+
+            </header>
+
+
+            <!-- Statistics -->
+
+            <section class="stats">
+
+                <div class="card">
+
+                    <h3 id="totalTasks">
+                        0
+                    </h3>
+
+                    <p>
+                        Total Tasks
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3 id="completedTasks">
+                        0
+                    </h3>
+
+                    <p>
+                        Completed
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3 id="pendingTasks">
+                        0
+                    </h3>
+
+                    <p>
+                        Pending
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- Add Task -->
+
+            <section class="add-task">
+
+                <h2>
+                    ➕ Add a New Task
+                </h2>
+
+
+                <div class="task-input">
+
+                    <input
+                        type="text"
+                        id="taskInput"
+                        placeholder="Enter your task..."
+                    >
+
+
+                    <button onclick="addTask()">
+                        Add Task
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- Recent Tasks -->
+
+            <section class="task-section">
+
+                <h2>
+                    📋 Recent Tasks
+                </h2>
+
+                <div id="dashboardTaskList">
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+        <!-- =========================
+             MY TASKS
+        ========================== -->
+
+        <section
+            id="tasks"
+            class="page">
+
+            <h1>📋 My Tasks</h1>
+
+            <p class="page-description">
+                Manage all your tasks from here.
+            </p>
+
+
+            <div class="task-section">
+
+                <div id="allTaskList">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CALENDAR
+        ========================== -->
+
+        <section
+            id="calendar"
+            class="page">
+
+            <h1>📅 Calendar</h1>
+
+            <p class="page-description">
+                View your study schedule and tasks.
+            </p>
+
+
+            <div class="calendar-card">
+
+                <h2>
+                    September 2026
+                </h2>
+
+
+                <div class="calendar">
+
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+
+
+                    <div></div>
+                    <div></div>
+                    <div>1</div>
+                    <div>2</div>
+                    <div>3</div>
+                    <div>4</div>
+                    <div>5</div>
+
+                    <div>6</div>
+                    <div>7</div>
+                    <div>8</div>
+                    <div>9</div>
+                    <div>10</div>
+                    <div>11</div>
+                    <div>12</div>
+
+                    <div>13</div>
+                    <div>14</div>
+                    <div>15</div>
+                    <div>16</div>
+                    <div>17</div>
+                    <div>18</div>
+                    <div>19</div>
+
+                    <div>20</div>
+                    <div>21</div>
+                    <div>22</div>
+                    <div>23</div>
+                    <div>24</div>
+                    <div>25</div>
+                    <div>26</div>
+
+                    <div>27</div>
+                    <div class="today">28</div>
+                    <div>29</div>
+                    <div>30</div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             STATISTICS
+        ========================== -->
+
+        <section
+            id="statistics"
+            class="page">
+
+            <h1>📊 Statistics</h1>
+
+            <p class="page-description">
+                See your task progress.
+            </p>
+
+
+            <div class="statistics-box">
+
+                <div class="stat-item">
+
+                    <h2 id="statTotal">
+                        0
+                    </h2>
+
+                    <p>Total Tasks</p>
+
+                </div>
+
+
+                <div class="stat-item">
+
+                    <h2 id="statCompleted">
+                        0
+                    </h2>
+
+                    <p>Completed</p>
+
+                </div>
+
+
+                <div class="stat-item">
+
+                    <h2 id="statPending">
+                        0
+                    </h2>
+
+                    <p>Pending</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SETTINGS
+        ========================== -->
+
+        <section
+            id="settings"
+            class="page">
+
+            <h1>⚙️ Settings</h1>
+
+            <p class="page-description">
+                Manage your application settings.
+            </p>
+
+
+            <div class="settings-box">
+
+                <label>
+                    Your Name
+                </label>
+
+
+                <input
+                    type="text"
+                    value="Shaik Ashenvali"
+                >
+
+
+                <label>
+                    Email
+                </label>
+
+
+                <input
+                    type="email"
+                    value="ashenvalishaik@gmail.com"
+                >
+
+
+                <button>
+                    Save Settings
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JavaScript -->
+
+    <script
+        src="{{ url_for('static', filename='script.js') }}">
+    </script>
+
+</body>
+
+</html>
